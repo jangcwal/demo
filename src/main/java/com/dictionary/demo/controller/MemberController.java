@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,7 +20,7 @@ public class MemberController {
     }
 
     @GetMapping("/members/new")
-    public String CreateForm() {
+    public String createForm() {
         return "members/createMemberForm";
     }
 
@@ -31,6 +32,7 @@ public class MemberController {
         member.setName(form.getName());
         member.setBirthday(form.getBirthday());
         member.setGender(form.getGender());
+        member.setPreference(new ArrayList<>(100));
 
         memberService.join(member);
 

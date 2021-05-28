@@ -1,9 +1,8 @@
 package com.dictionary.demo.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -17,6 +16,13 @@ public class Member {
     private String name;
     private String birthday;
     private String gender;
+
+    @ElementCollection
+    private List<Integer> preference;
+
+    public List<Integer> getPreference() { return preference; }
+
+    public void setPreference(List<Integer> preference) { this.preference = preference; }
 
     public Long getId() {
         return id;
