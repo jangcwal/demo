@@ -15,13 +15,12 @@ public class MPController {
     public String getApi() {
         StringBuffer result = new StringBuffer();
         try{
-            String urlStr = "https://open.assembly.go.kr/portal/openapi/npffdutiapkzbfyvr?" +
+            String urlStr = "https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu?" +
                     "Key=fc034b86fe884eb299b8fc089cdc78d4" +
                     "&Type=json" +
                     "&pIndex=1" +
                     "&pSize=1" +
-                    "&MONA_CD=XQ98168F" +
-                    "&UNIT_CD=100020";
+                    "&MONA_CD=14M56632";
 
             URL url = new URL(urlStr);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -41,7 +40,7 @@ public class MPController {
                     "&pIndex=1" +
                     "&pSize=10" +
                     "&AGE=21" +
-                    "&PROPOSER=%EA%B0%95%EA%B8%B8%EB%B6%80";
+                    "&PROPOSER=%EA%B0%95%EA%B8%B0%EC%9C%A4";
             url = new URL(urlStr);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
