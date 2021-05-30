@@ -17,13 +17,13 @@ public class Bill {
     private String COMMITTEE;
     private String PROPOSE_DT;
     private String PROC_RESULT;
-    private Long AGE;
+    private String AGE;
     private String DETAIL_LINK;
     private String PROPOSER;
     private String MEMBER_LIST;
     private String RST_PROPOSER;
     private String PUBL_PROPOSER;
-    private Long COMMITTEE_ID;
+    private String COMMITTEE_ID;
 
     public Long getId() {
         return id;
@@ -81,11 +81,11 @@ public class Bill {
         this.PROC_RESULT = PROC_RESULT;
     }
 
-    public Long getAGE() {
+    public String getAGE() {
         return AGE;
     }
 
-    public void setAGE(Long AGE) {
+    public void setAGE(String AGE) {
         this.AGE = AGE;
     }
 
@@ -129,11 +129,11 @@ public class Bill {
         this.PUBL_PROPOSER = PUBL_PROPOSER;
     }
 
-    public Long getCOMMITTEE_ID() {
+    public String getCOMMITTEE_ID() {
         return COMMITTEE_ID;
     }
 
-    public void setCOMMITTEE_ID(Long COMMITTEE_ID) {
+    public void setCOMMITTEE_ID(String COMMITTEE_ID) {
         this.COMMITTEE_ID = COMMITTEE_ID;
     }
 }
