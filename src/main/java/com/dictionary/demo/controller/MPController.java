@@ -84,7 +84,7 @@ public class MPController {
         }
 
         mpService.init(result.toString());
-        Optional<MP> mp = mpService.findOne("14M56632");
+        MP mp = mpService.findOne("14M56632").orElseThrow();
         model.addAttribute("MP", mp);
         return "MPs/MPPage";
     }
