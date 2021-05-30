@@ -1,13 +1,14 @@
 package com.dictionary.demo.controller;
 
+import com.dictionary.demo.domain.MP;
+import com.dictionary.demo.service.MPService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.BufferedReader;
@@ -15,9 +16,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
-@RestController
+@Controller
 public class MPController {
+    private final MPService mpService;
+
+    public MPController(MPService mpService) { this.mpService = mpService; }
 
     @GetMapping("/party")
     public String party() {
@@ -25,7 +30,7 @@ public class MPController {
     }
 
     @GetMapping("/MPPage/{HG_NM}")
-    public String getApi(@PathVariable("HG_NM") String s) {
+    public String getApi(@PathVariable("HG_NM") String s, Model model) {
         byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
         String temp = DatatypeConverter.printHexBinary(bytes);
         StringBuffer sb = new StringBuffer();
@@ -55,7 +60,7 @@ public class MPController {
             }
             urlConnection.disconnect();
 
-            urlStr = "https://open.assembly.go.kr/portal/openapi/nzmimeepazxkubdpn?" +
+            /*urlStr = "https://open.assembly.go.kr/portal/openapi/nzmimeepazxkubdpn?" +
                     "Key=fc034b86fe884eb299b8fc089cdc78d4" +
                     "&Type=json" +
                     "&pIndex=1" +
@@ -73,11 +78,14 @@ public class MPController {
             while((returnLine = br.readLine()) != null) {
                 result.append(returnLine);
             }
-            urlConnection.disconnect();
+            urlConnection.disconnect();*/
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return result.toString();
+        mpService.init(result.toString());
+        Optional<MP> mp = mpService.findOne("14M56632");
+        model.addAttribute("MP", mp);
+        return "MPs/MPPage";
     }
 }
