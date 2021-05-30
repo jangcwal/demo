@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Math.min;
+
 @Controller
 public class MPController {
     private final MPService mpService;
@@ -40,11 +42,10 @@ public class MPController {
         String temp = DatatypeConverter.printHexBinary(bytes);
         StringBuffer sb = new StringBuffer();
 
-        for(int i=0;i<temp.length();i++) {
+        for(int i = 0; i < temp.length(); i++) {
             if(i%2==0) sb.append("%");
             sb.append(temp.charAt(i));
         }
-
         StringBuffer result = new StringBuffer();
         StringBuffer result1 = new StringBuffer();
         try{
@@ -119,7 +120,8 @@ public class MPController {
             mp.setSECRETARY2(obj.get("SECRETARY2").toString());
             mp.setJOB_RES_NM(obj.get("JOB_RES_NM").toString());
             mp.setSTAFF(obj.get("STAFF").toString());
-            mp.setHOMEPAGE(obj.get("HOMEPAGE").toString());
+            if(obj.get("HOMEPAGE")!=null) mp.setHOMEPAGE(obj.get("HOMEPAGE").toString());
+            else mp.setHOMEPAGE("없음");
             mp.setCMIT_NM(obj.get("CMIT_NM").toString());
             mp.setSECRETARY(obj.get("SECRETARY").toString());
             mp.setORIG_NM(obj.get("ORIG_NM").toString());
