@@ -29,12 +29,20 @@ public class DemoApplication implements CommandLineRunner {
             member.setName("멤버" + Integer.toString(i));
             member.setBirthday("2000.10.1" + Integer.toString(i-1));
             member.setGender("남");
-            String s = "";
+            StringBuffer sb = new StringBuffer();
             for(int j = 0; j < 100; j++) {
                 int a = (int) (Math.random()*10000) % 5;
-                s += Integer.toString(a);
+                sb.append(Integer.toString(a));
             }
-            member.setScore(s);
+            int cnt = 0;
+            for(int j = 99; j >= 0; j--) {
+                cnt++;
+                if(cnt==3) {
+                    sb.insert(j, ",");
+                    cnt = 0;
+                }
+            }
+            member.setScore(sb.toString());
             memberService.join(member);
         }
     }

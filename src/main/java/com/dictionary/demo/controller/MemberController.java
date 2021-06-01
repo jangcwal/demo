@@ -88,13 +88,16 @@ public class MemberController {
             Member member = members.get(i);
             String str = member.getScore();
 
+            int cnt = 0;
             for(int j = 0; j < str.length(); j++) {
+                if(str.charAt(j)==',') continue;
                 int a = str.charAt(j) - '0';
                 if(i == 0) numer.add(similarity.get(i) * a);
                 else {
-                    double temp = numer.get(j) + similarity.get(i) * a;
-                    numer.set(j, temp);
+                    double temp = numer.get(cnt) + similarity.get(i) * a;
+                    numer.set(cnt, temp);
                 }
+                cnt++;
             }
         }
 
@@ -174,6 +177,7 @@ public class MemberController {
         String score2 = member.getScore();
 
         for(int i = 0; i < score1.length(); i++) {
+            if(score1.charAt(i)==',') continue;
             int a = score1.charAt(i) - '0';
             int b = score2.charAt(i) - '0';
 
