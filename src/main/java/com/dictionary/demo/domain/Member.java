@@ -16,13 +16,11 @@ public class Member {
     private String name;
     private String birthday;
     private String gender;
+    private String score;
 
-    @ElementCollection
-    private List<Integer> preference;
+    public String getScore() { return score; }
 
-    public List<Integer> getPreference() { return preference; }
-
-    public void setPreference(List<Integer> preference) { this.preference = preference; }
+    public void setScore(String score) { this.score = score; }
 
     public Long getId() {
         return id;

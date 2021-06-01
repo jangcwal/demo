@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            </thead>
+            <tbody>
+            <td th:object="${Bill}"></td>
+            <td th:text="*{Bill.BILL_NO}"></td>
+            <td th:text="*{Bill.BILL_NAME}"></td>
+            <td th:text="*{Bill.COMMITTEE}"></td>
+            <td th:text="*{Bill.PROPOSE_DT}"></td>
+            <td th:text="*{Bill.PROC_RESULT}"></td>
+            <td th:text="*{Bill.AGE}"></td>
+            <td th:text="*{Bill.DETAIL_LINK}"></td>
+            <td th:text="*{Bill.PROPOSER}"></td>
+            <td th:text="*{Bill.MEMBER_LIST}"></td>
+            <td th:text="*{Bill.RST_PROPOSER}"></td>
+            <td th:text="*{Bill.PUBL_PROPOSER}"></td>
+            <td th:text="*{Bill.COMMITTEE_ID}"></td>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
