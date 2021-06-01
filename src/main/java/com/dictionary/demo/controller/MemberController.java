@@ -82,22 +82,18 @@ public class MemberController {
         * */
         double demo = 0;
         for(int i = 0; i < similarity.size(); i++) demo += similarity.get(i);
-
+        System.out.println("demo = " + demo);
         List<Double> numer = new ArrayList<>();
         for(int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
-            String str = member.getScore();
-
-            int cnt = 0;
-            for(int j = 0; j < str.length(); j++) {
-                if(str.charAt(j)==',') continue;
-                int a = str.charAt(j) - '0';
+            String[] str = member.getScore().split(",");
+            for(int j = 0; j < str.length; j++) {
+                int a = str[j].charAt(0) - '0';
                 if(i == 0) numer.add(similarity.get(i) * a);
                 else {
-                    double temp = numer.get(cnt) + similarity.get(i) * a;
-                    numer.set(cnt, temp);
+                    double temp = numer.get(j) + similarity.get(i) * a;
+                    numer.set(j, temp);
                 }
-                cnt++;
             }
         }
 
@@ -146,7 +142,6 @@ public class MemberController {
             JSONArray rowArray = (JSONArray) row.get("row");
             JSONObject obj = (JSONObject) rowArray.get(0);
 
-            System.out.println(obj);
             Bill bill = new Bill();
             bill.setBILL_NO(obj.get("BILL_NO").toString());
             bill.setBILL_NAME(obj.get("BILL_NAME").toString());
@@ -162,7 +157,6 @@ public class MemberController {
             bill.setPUBL_PROPOSER(obj.get("PUBL_PROPOSER").toString());
             bill.setCOMMITTEE_ID(obj.get("COMMITTEE_ID").toString());
 
-            System.out.println(bill.getBILL_ID());
             model.addAttribute("Bill", bill);
         } catch (Exception e) {
             e.printStackTrace();
@@ -173,14 +167,12 @@ public class MemberController {
 
     private double cos(Member target, Member member) {
         int multi = 0, temp1 = 0, temp2 = 0;
-        String score1 = target.getScore();
-        String score2 = member.getScore();
+        String[] score1 = target.getScore().split(",");
+        String[] score2 = member.getScore().split(",");
 
-        for(int i = 0; i < score1.length(); i++) {
-            if(score1.charAt(i)==',') continue;
-            int a = score1.charAt(i) - '0';
-            int b = score2.charAt(i) - '0';
-
+        for(int i = 0; i < score1.length; i++) {
+            int a = score1[i].charAt(0) - '0';
+            int b = score2[i].charAt(0) - '0';
             multi += a*b;
             temp1 += a*a;
             temp2 += b*b;

@@ -33,15 +33,10 @@ public class DemoApplication implements CommandLineRunner {
             for(int j = 0; j < 100; j++) {
                 int a = (int) (Math.random()*10000) % 5;
                 sb.append(Integer.toString(a));
+                if(j==99) break;
+                sb.append(",");
             }
-            int cnt = 0;
-            for(int j = 99; j >= 0; j--) {
-                cnt++;
-                if(cnt==3) {
-                    sb.insert(j, ",");
-                    cnt = 0;
-                }
-            }
+
             member.setScore(sb.toString());
             memberService.join(member);
         }
