@@ -54,7 +54,7 @@ public class MemberController {
         try { memberService.join(member); }
         catch (IllegalStateException e) {
             ModelAndView mv = new ModelAndView("/members/createMemberForm");
-            mv.addObject("message", "이미 등록된 이메일입니다.");
+            mv.addObject("message", "error");
             return mv;
         }
 

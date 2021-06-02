@@ -22,7 +22,7 @@
     <table>
         <tbody>
             <td th:object="${message}"></td>
-            <th:block th:if="${message.length() != 0}">
+            <th:block th:if="${message?.length() == 5}">
                 <script>
                     alert("이미 존재하는 회원입니다.");
                 </script>
