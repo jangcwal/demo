@@ -13,8 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.ls.LSInput;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSessionEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -37,7 +43,7 @@ public class MemberController {
     }
 
     @PostMapping("/members/new")
-    public String create(MemberForm form) {
+    public ModelAndView create(MemberForm form) {
         Member member = new Member();
         member.setEmail(form.getEmail());
         member.setPassword(form.getPassword());
@@ -45,9 +51,15 @@ public class MemberController {
         member.setBirthday(form.getBirthday());
         member.setGender(form.getGender());
 
-        memberService.join(member);
+        try { memberService.join(member); }
+        catch (IllegalStateException e) {
+            ModelAndView mv = new ModelAndView("/members/createMemberForm");
+            mv.addObject("message", "이미 등록된 이메일입니다.");
+            return mv;
+        }
 
-        return "redirect:/";
+        ModelAndView mv = new ModelAndView("redirect:/");
+        return mv;
     }
 
     @GetMapping("/members")
